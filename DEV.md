@@ -5,8 +5,8 @@
 `Makefile`s are used to encapsulate the various tools in the toolchain:
 
 ```bash
-make build      # builds Android, JRE libraries and examples
-make publish    # increment versions and publish the artifacts to bintray
+make build      # builds Android library and examples
+make publish    # increment versions and publish the artifact to bintray
 ```
 
 NOTE: to publish, `BINTRAY_USER` and `BINTRAY_API_KEY` need to be set in the shell environment.
@@ -16,7 +16,7 @@ NOTE: to publish, `BINTRAY_USER` and `BINTRAY_API_KEY` need to be set in the she
 ```
 Makefile                    # Top-level Makefile to encapsulate tool-specifics
 lightstep-tracer-android/   # Android instrumentation library
-examples/                   # Sample code for both Android
+examples/                   # Sample code for Android
 ```
 
 ## Formatting
