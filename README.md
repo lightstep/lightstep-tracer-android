@@ -2,11 +2,10 @@
 
 [ ![Download](https://api.bintray.com/packages/lightstep/maven/lightstep-tracer-android/images/download.svg) ](https://bintray.com/lightstep/maven/) [![Circle CI](https://circleci.com/gh/lightstep/lightstep-tracer-java.svg?style=shield)](https://circleci.com/gh/lightstep/lightstep-tracer-java) [![MIT license](http://img.shields.io/badge/license-MIT-blue.svg)](http://opensource.org/licenses/MIT)
 
-The LightStep distributed tracing library for Android and the standard Java runtime environment.
+The LightStep distributed tracing library for Android.
 
 * [Getting Started](#getting-started)
   * [Android](#getting-started-android)
-  * [JRE](#getting-started-jre)
 * [API documentation](#apidocs)
 * [Options](#options)
 
@@ -71,62 +70,6 @@ protected void onCreate(Bundle savedInstanceState) {
     span.finish();
 ```
 
-<a name="#getting-started-jre"></a>
-
-## Getting started: JRE
-
-The JRE library is hosted on Bintray, jcenter, and Maven Central. The Bintray [lightstep-tracer-jre](https://bintray.com/lightstep/maven/lightstep-tracer-jre/view) project contains additional installation and setup information for using the library with various build systems such as Ivy and Maven.
-
-### Maven
-
-```xml
-<dependency>
-  <groupId>com.lightstep.tracer</groupId>
-  <artifactId>lightstep-tracer-jre</artifactId>
-  <version> VERSION </version>
-</dependency>
-```
-
-* Be sure to replace `VERSION` with the current version of the library
-
-### Gradle
-
-In most cases, modifying your `build.gradle` with the below is all that is required:
-
-```
-repositories {
-    mavenCentral() // OR jcenter()
-}
-dependencies {
-    compile 'com.lightstep.tracer:lightstep-tracer-jre:VERSION'
-}
-```
-
-* Be sure to replace `VERSION` with the current version of the library
-* The artifact is published to both `jcenter()` and `mavenCentral()`. Use whichever you prefer.
-
-### Initializing the LightStep Tracer
-
-```java
-// Important the OpenTracing interfaces
-import io.opentracing.Span;
-import io.opentracing.Tracer;
-
-// ...
-
-// Initialize the OpenTracing Tracer with LightStep's implementation
-Tracer tracer = new com.lightstep.tracer.jre.JRETracer(
-         new com.lightstep.tracer.shared.Options.OptionsBuilder()
-            .withAccessToken("{your_access_token}")
-            .build()
-);
-
-// Start and finish a Span
-Span span = this.tracer.buildSpan("my_span").start();
-this.doSomeWorkHere();
-span.finish();
-```
-
 <a name="apidocs"></a>
 ## API Documentation
 
@@ -138,7 +81,6 @@ Tracing instrumentation should use the OpenTracing APIs to stay portable and in 
 For reference, the generated LightStep documentation is also available:
 
 * [lightstep-tracer-android (javadoc)](http://javadoc.io/doc/com.lightstep.tracer/lightstep-tracer-android)
-* [lightstep-tracer-jre (javadoc)](http://javadoc.io/doc/com.lightstep.tracer/lightstep-tracer-jre)
 
 ## Options
 
