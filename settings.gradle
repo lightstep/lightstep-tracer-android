@@ -1,10 +1,4 @@
-rootProject.name = 'lightstep-tracer-java'
-
-include "java-common"
-project(":java-common").projectDir = file("common")
-
-include 'lightstep-tracer-jre'
-include 'examples:jre-simple'
+rootProject.name = 'lightstep-tracer-android'
 
 if (System.getenv()['ANDROID_HOME']) {
     include 'lightstep-tracer-android'
