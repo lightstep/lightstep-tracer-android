@@ -10,7 +10,7 @@ import com.lightstep.tracer.shared.AbstractTracer;
 import com.lightstep.tracer.shared.Options;
 import com.lightstep.tracer.shared.SimpleFuture;
 
-import static com.lightstep.tracer.shared.Version.LIGHTSTEP_TRACER_VERSION;
+import static com.lightstep.tracer.android.Version.LIGHTSTEP_TRACER_VERSION;
 
 public class Tracer extends AbstractTracer {
     private final Context ctx;
