@@ -128,7 +128,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.lightstep.tracer:java-common:0.12.5'
+    compile 'com.lightstep.tracer:java-common:0.12.7'
     compile 'io.grpc:grpc-okhttp:1.2.0'
 }
 

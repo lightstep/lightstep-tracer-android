@@ -40,3 +40,4 @@ inc-version:
 	@git diff-index --quiet HEAD || (echo "git has uncommitted changes. Refusing to publish." && false)
 	awk 'BEGIN { FS = "." }; { printf("%s.%d.%d", $$1, $$2, $$3+1) }' gradle.properties > gradle.properties.incr
 	mv gradle.properties.incr gradle.properties
+	make -C lightstep-tracer-android generate-version-source-file
