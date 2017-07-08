@@ -42,8 +42,11 @@ repositories {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.3.0'
-    compile 'com.android.support:design:23.3.0'
-    compile project(':lightstep-tracer-android')
+    testCompile "junit:junit:${junitVersion}"
+    compile "com.android.support:appcompat-v7:${androidSupportVersion}"
+    compile "com.android.support:design:${androidSupportVersion}"
+    compile(project(":lightstep-tracer-android")) {
+        exclude module: 'httpclient'
+        exclude group: 'com.google.guava'
+    }
 }
