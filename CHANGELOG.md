@@ -1,5 +1,18 @@
 <a name="Pending Release"></a>
-## [Pending Release](https://github.com/lightstep/lightstep-tracer-java/compare/master...0.12.5)
+## [Pending Release](https://github.com/lightstep/lightstep-tracer-java/compare/master...0.12.8)
+
+<a name="0.12.8"></a>
+## [0.12.8](https://github.com/lightstep/lightstep-tracer-java/compare/0.12.7...0.12.8)
+* Upgrade java-common to 0.13.0
+
+<a name="0.12.7"></a>
+## [0.12.7](https://github.com/lightstep/lightstep-tracer-java/compare/0.12.6...0.12.7)
+* Upgraded Gradle plugin from 2.2.0 to 2.2.2
+* Upgraded java-common to 0.12.7
+
+<a name="0.12.6"></a>
+## [0.12.6](https://github.com/lightstep/lightstep-tracer-java/compare/0.12.5...0.12.6)
+* Moved to separate repo from java-common
 
 <a name="0.12.5"></a>
 ## [0.12.5](https://github.com/lightstep/lightstep-tracer-java/compare/0.12.4...0.12.5)
