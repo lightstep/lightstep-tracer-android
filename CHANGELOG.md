@@ -1,5 +1,9 @@
 <a name="Pending Release"></a>
-## [Pending Release](https://github.com/lightstep/lightstep-tracer-java/compare/master...0.12.8)
+## [Pending Release](https://github.com/lightstep/lightstep-tracer-java/compare/master...0.12.9)
+
+<a name="0.12.9"></a>
+## [0.12.9](https://github.com/lightstep/lightstep-tracer-java/compare/0.12.8...0.12.9)
+* Fixed bug in 0.12.8 where the Version reported by the client would incorrectly be 0.12.7
 
 <a name="0.12.8"></a>
 ## [0.12.8](https://github.com/lightstep/lightstep-tracer-java/compare/0.12.7...0.12.8)
