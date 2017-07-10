@@ -16,6 +16,7 @@ test: ci_test
 # See https://bintray.com/lightstep for published artifacts
 publish: pre-publish build test inc-version
 	git add gradle.properties
+	git add lightstep-tracer-android/src/main/java/com/lightstep/tracer/android/Version.java
 	git commit -m "VERSION `awk 'BEGIN { FS = "=" }; { printf("%s", $$2) }' gradle.properties`"
 	git tag `awk 'BEGIN { FS = "=" }; { printf("%s", $$2) }' gradle.properties`
 	git push
