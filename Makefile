@@ -1,4 +1,4 @@
-.PHONY: build publish pre-publish ci_test clean test inc-version
+.PHONY: build publish pre-publish ci_test clean test inc-version verify-version
 
 build:
 	./gradlew build
@@ -14,7 +14,7 @@ test: ci_test
 # a setup error -- but for now, a clean build is done just in case.
 #
 # See https://bintray.com/lightstep for published artifacts
-publish: pre-publish build test inc-version
+publish: pre-publish build test verify-version
 	git add gradle.properties
 	git add lightstep-tracer-android/src/main/java/com/lightstep/tracer/android/Version.java
 	git commit -m "VERSION `awk 'BEGIN { FS = "=" }; { printf("%s", $$2) }' gradle.properties`"
@@ -38,7 +38,9 @@ ci_test: build
 	./gradlew test
 
 inc-version:
-	@git diff-index --quiet HEAD || (echo "git has uncommitted changes. Refusing to publish." && false)
 	awk 'BEGIN { FS = "." }; { printf("%s.%d.%d", $$1, $$2, $$3+1) }' gradle.properties > gradle.properties.incr
 	mv gradle.properties.incr gradle.properties
+
+verify-version:
+	@git diff-index --quiet HEAD || (echo "git has uncommitted changes. Refusing to publish." && false)
 	make -C lightstep-tracer-android generate-version-source-file
