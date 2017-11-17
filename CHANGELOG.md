@@ -2,7 +2,7 @@
 ## [Pending Release](https://github.com/lightstep/lightstep-tracer-android/compare/master...0.13.0)
 
 ## [0.13.0](https://github.com/lightstep/lightstep-tracer-android/compare/0.12.9...0.13.0)
-* Upgrade java-common to 0.14.1
+* Upgrade java-common to 0.14.2
 * Split grpc transport support into a separate dependency.
 
 We are splitting out our transport dependency from our main tracer to making binaries smaller.
