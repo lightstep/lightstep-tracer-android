@@ -14,12 +14,8 @@ test: ci_test
 # a setup error -- but for now, a clean build is done just in case.
 #
 # See https://bintray.com/lightstep for published artifacts
-publish: pre-publish build test verify-version
-	git add gradle.properties
-	git add lightstep-tracer-android/src/main/java/com/lightstep/tracer/android/Version.java
-	git commit -m "VERSION `awk 'BEGIN { FS = "=" }; { printf("%s", $$2) }' gradle.properties`"
+publish: pre-publish build test
 	git tag `awk 'BEGIN { FS = "=" }; { printf("%s", $$2) }' gradle.properties`
-	git push
 	git push --tags
 	./gradlew bintrayUpload
 	@echo
@@ -31,6 +27,7 @@ pre-publish:
 	@test -n "$$BINTRAY_API_KEY" || (echo "BINTRAY_API_KEY must be defined to publish" && false)
 	@test -n "$$MAVEN_CENTRAL_USER_TOKEN" || (echo "MAVEN_CENTRAL_USER_TOKEN must be defined to publish" && false)
 	@test -n "$$MAVEN_CENTRAL_TOKEN_PASSWORD" || (echo "MAVEN_CENTRAL_TOKEN_PASSWORD must be defined to publish" && false)
+	@git diff-index --quiet HEAD || (echo "git has uncommitted changes. Refusing to publish." && false)
 	@echo "\033[92mPublishing as $$BINTRAY_USER with key <HIDDEN> \033[0m"
 
 # CircleCI test
@@ -40,7 +37,8 @@ ci_test: build
 inc-version:
 	awk 'BEGIN { FS = "." }; { printf("%s.%d.%d", $$1, $$2, $$3+1) }' gradle.properties > gradle.properties.incr
 	mv gradle.properties.incr gradle.properties
-
-verify-version:
-	@git diff-index --quiet HEAD || (echo "git has uncommitted changes. Refusing to publish." && false)
 	make -C lightstep-tracer-android generate-version-source-file
+	git add gradle.properties
+	git add lightstep-tracer-android/src/main/java/com/lightstep/tracer/android/Version.java
+	git commit -m "VERSION `awk 'BEGIN { FS = "=" }; { printf("%s", $$2) }' gradle.properties`"
+	git push
