@@ -3,5 +3,5 @@
 ext {
     junitVersion = "4.12"
     androidSupportVersion = "23.0.0"
-    openTracingVersion = "0.30.0"
+    openTracingVersion = "0.31.0"
 }

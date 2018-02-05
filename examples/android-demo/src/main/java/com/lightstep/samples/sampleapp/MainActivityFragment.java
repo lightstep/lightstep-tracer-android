@@ -150,7 +150,9 @@ public class MainActivityFragment extends Fragment {
                                                 }
                                             }, errorListener);
                                 } catch (JSONException e) {
-                                    span.log("Error parsing JSON response", e);
+                                    Map<String, Object> fields = new HashMap<>();
+                                    fields.put("exception", e);
+                                    span.log(fields);
                                     span.setTag("error", true);
                                     span.finish();
                                     displayError(e.toString());
@@ -159,7 +161,9 @@ public class MainActivityFragment extends Fragment {
                         }, errorListener);
                 return null;
             } catch (Exception e) {
-                span.log("Caught exception", e);
+                Map<String, Object> fields = new HashMap<>();
+                fields.put("exception", e);
+                span.log(fields);
                 span.setTag("error", true);
                 span.finish();
                 displayError(e.toString());
@@ -171,7 +175,9 @@ public class MainActivityFragment extends Fragment {
                                final Response.Listener<String> listener,
                                final Response.ErrorListener errorListener) {
             Span childSpan = tracer.buildSpan("http_get").asChildOf(span).start();
-            childSpan.log("HTTP request", url);
+            Map<String, Object> fields = new HashMap<>();
+            fields.put("HTTP request", url);
+            childSpan.log(fields);
             WrappedRequest req = new WrappedRequest(childSpan, url, listener, errorListener);
             queue.add(req);
         }
@@ -217,7 +223,9 @@ public class MainActivityFragment extends Fragment {
                 resultsView.setText(output.toString());
                 resultsScrollView.setScrollY(0);
             } catch (JSONException e) {
-                span.log("Error extracting info from JSON response", e);
+                Map<String, Object> fields = new HashMap<>();
+                fields.put("exception", e);
+                span.log(fields);
             } finally {
                 span.finish();
             }
@@ -246,12 +254,15 @@ public class MainActivityFragment extends Fragment {
                         @Override
                         public void onResponse(String response) {
                             // TODO don't parse twice
+                            Map<String, Object> fields = new HashMap<>();
                             try {
                                 JSONObject obj = new JSONObject(response);
-                                span.log("HTTP response", obj);
+                                fields.put("HTTP response", obj);
+                                span.log(fields);
                             } catch (JSONException e) {
                                 // Just log the string
-                                span.log("HTTP response", response);
+                                fields.put("HTTP response", response);
+                                span.log(fields);
                             }
                             span.finish();
                             // TODO check for application errors
@@ -262,7 +273,9 @@ public class MainActivityFragment extends Fragment {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             // TODO also propagate errors
-                            span.log("HTTP error", error);
+                            Map<String, Object> fields = new HashMap<>();
+                            fields.put("exception", error);
+                            span.log(fields);
                             span.finish();
                             errorListener.onErrorResponse(error);
                         }
