@@ -20,6 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.common.collect.ImmutableMap;
 import com.lightstep.tracer.shared.Options;
 
 import org.json.JSONArray;
@@ -150,7 +151,7 @@ public class MainActivityFragment extends Fragment {
                                                 }
                                             }, errorListener);
                                 } catch (JSONException e) {
-                                    span.log("Error parsing JSON response", e);
+                                    span.log(new ImmutableMap.Builder<String, Object>().put("exception", e).build());
                                     span.setTag("error", true);
                                     span.finish();
                                     displayError(e.toString());
@@ -159,7 +160,7 @@ public class MainActivityFragment extends Fragment {
                         }, errorListener);
                 return null;
             } catch (Exception e) {
-                span.log("Caught exception", e);
+                span.log(new ImmutableMap.Builder<String, Object>().put("exception", e).build());
                 span.setTag("error", true);
                 span.finish();
                 displayError(e.toString());
@@ -171,7 +172,7 @@ public class MainActivityFragment extends Fragment {
                                final Response.Listener<String> listener,
                                final Response.ErrorListener errorListener) {
             Span childSpan = tracer.buildSpan("http_get").asChildOf(span).start();
-            childSpan.log("HTTP request", url);
+            childSpan.log(new ImmutableMap.Builder<String, Object>().put("HTTP request", url).build());
             WrappedRequest req = new WrappedRequest(childSpan, url, listener, errorListener);
             queue.add(req);
         }
@@ -217,7 +218,7 @@ public class MainActivityFragment extends Fragment {
                 resultsView.setText(output.toString());
                 resultsScrollView.setScrollY(0);
             } catch (JSONException e) {
-                span.log("Error extracting info from JSON response", e);
+                span.log(new ImmutableMap.Builder<String, Object>().put("exception", e).build());
             } finally {
                 span.finish();
             }
@@ -248,10 +249,10 @@ public class MainActivityFragment extends Fragment {
                             // TODO don't parse twice
                             try {
                                 JSONObject obj = new JSONObject(response);
-                                span.log("HTTP response", obj);
+                                span.log(new ImmutableMap.Builder<String, Object>().put("HTTP response", obj).build());
                             } catch (JSONException e) {
                                 // Just log the string
-                                span.log("HTTP response", response);
+                                span.log(new ImmutableMap.Builder<String, Object>().put("HTTP response", response).build());
                             }
                             span.finish();
                             // TODO check for application errors
@@ -262,7 +263,7 @@ public class MainActivityFragment extends Fragment {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             // TODO also propagate errors
-                            span.log("HTTP error", error);
+                            span.log(new ImmutableMap.Builder<String, Object>().put("exception", error).build());
                             span.finish();
                             errorListener.onErrorResponse(error);
                         }
