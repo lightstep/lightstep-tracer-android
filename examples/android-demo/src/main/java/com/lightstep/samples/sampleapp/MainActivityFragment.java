@@ -20,7 +20,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.common.collect.ImmutableMap;
 import com.lightstep.tracer.shared.Options;
 
 import org.json.JSONArray;
@@ -151,7 +150,9 @@ public class MainActivityFragment extends Fragment {
                                                 }
                                             }, errorListener);
                                 } catch (JSONException e) {
-                                    span.log(new ImmutableMap.Builder<String, Object>().put("exception", e).build());
+                                    Map<String, Object> fields = new HashMap<>();
+                                    fields.put("exception", e);
+                                    span.log(fields);
                                     span.setTag("error", true);
                                     span.finish();
                                     displayError(e.toString());
@@ -160,7 +161,9 @@ public class MainActivityFragment extends Fragment {
                         }, errorListener);
                 return null;
             } catch (Exception e) {
-                span.log(new ImmutableMap.Builder<String, Object>().put("exception", e).build());
+                Map<String, Object> fields = new HashMap<>();
+                fields.put("exception", e);
+                span.log(fields);
                 span.setTag("error", true);
                 span.finish();
                 displayError(e.toString());
@@ -172,7 +175,9 @@ public class MainActivityFragment extends Fragment {
                                final Response.Listener<String> listener,
                                final Response.ErrorListener errorListener) {
             Span childSpan = tracer.buildSpan("http_get").asChildOf(span).start();
-            childSpan.log(new ImmutableMap.Builder<String, Object>().put("HTTP request", url).build());
+            Map<String, Object> fields = new HashMap<>();
+            fields.put("HTTP request", url);
+            childSpan.log(fields);
             WrappedRequest req = new WrappedRequest(childSpan, url, listener, errorListener);
             queue.add(req);
         }
@@ -218,7 +223,9 @@ public class MainActivityFragment extends Fragment {
                 resultsView.setText(output.toString());
                 resultsScrollView.setScrollY(0);
             } catch (JSONException e) {
-                span.log(new ImmutableMap.Builder<String, Object>().put("exception", e).build());
+                Map<String, Object> fields = new HashMap<>();
+                fields.put("exception", e);
+                span.log(fields);
             } finally {
                 span.finish();
             }
@@ -247,12 +254,15 @@ public class MainActivityFragment extends Fragment {
                         @Override
                         public void onResponse(String response) {
                             // TODO don't parse twice
+                            Map<String, Object> fields = new HashMap<>();
                             try {
                                 JSONObject obj = new JSONObject(response);
-                                span.log(new ImmutableMap.Builder<String, Object>().put("HTTP response", obj).build());
+                                fields.put("HTTP response", obj);
+                                span.log(fields);
                             } catch (JSONException e) {
                                 // Just log the string
-                                span.log(new ImmutableMap.Builder<String, Object>().put("HTTP response", response).build());
+                                fields.put("HTTP response", response);
+                                span.log(fields);
                             }
                             span.finish();
                             // TODO check for application errors
@@ -263,7 +273,9 @@ public class MainActivityFragment extends Fragment {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             // TODO also propagate errors
-                            span.log(new ImmutableMap.Builder<String, Object>().put("exception", error).build());
+                            Map<String, Object> fields = new HashMap<>();
+                            fields.put("exception", error);
+                            span.log(fields);
                             span.finish();
                             errorListener.onErrorResponse(error);
                         }
