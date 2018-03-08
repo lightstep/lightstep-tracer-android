@@ -29,6 +29,7 @@ android {
 
     lintOptions {
         lintConfig file("lint.xml")
+        abortOnError false
     }
 
     sourceSets {
@@ -78,11 +79,19 @@ dependencies {
     compile(project(":lightstep-tracer-android")) {
         // Not needed on Android
         exclude module: 'httpclient'
-        exclude group: 'com.google.guava'
     }
     // ^^^ INCLUDE FOR BUILDS FROM LOCAL SOURCE
 
     // vvv INCLUDE FOR BUILDS AGAINST PUBLISHED AAR
     //compile 'com.lightstep.tracer:lightstep-tracer-android:' + version
     // ^^^ INCLUDE FOR BUILDS AGAINST PUBLISHED AAR
+
+    compile("com.lightstep.tracer:tracer-grpc:${lightStepTracerVersion}") {
+        // Not needed on Android
+        exclude group: 'com.google.guava'
+    }
+    compile("io.grpc:grpc-okhttp:${grpcVersion}")  {
+        // Not needed on Android
+        exclude group: 'com.google.guava'
+    }
 }

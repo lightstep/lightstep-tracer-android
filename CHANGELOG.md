@@ -1,6 +1,36 @@
 <a name="Pending Release"></a>
 ## [Pending Release](https://github.com/lightstep/lightstep-tracer-android/compare/master...0.14.0)
 
+* Remove tracer-grpc and grpc-okhttp dependency from being directly compiled into the tracer.
+  You will now need to provide your own tracer transport and grpc transport libraries.
+  Below are the defaults.
+
+### Maven
+
+```
+<dependency>
+   <groupId>com.lightstep.tracer</groupId>
+   <artifactId>tracer-grpc</artifactId>
+   <version>${com.lightstep.tracer.version}</version>
+</dependency>
+<dependency>
+   <groupId>io.grpc</groupId>
+   <artifactId>grpc-okhttp</artifactId>
+   <version>${io.grpc.version}</version>
+</dependency>
+```
+
+### Gradle
+
+```
+dependencies {
+    ...
+    compile "com.lightstep.tracer:tracer-grpc:${com.lightstep.tracer.version}"
+    compile "io.grpc:grpc-okhttp:${io.grpc.version}"
+    ...
+}
+```
+
 <a name="0.14.0"></a>
 ## [0.14.0](https://github.com/lightstep/lightstep-tracer-android/compare/0.14.0...0.13.1)
 * Upgraded to io.opentracing 0.31.0, for more information see 
