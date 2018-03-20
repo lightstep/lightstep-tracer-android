@@ -147,7 +147,7 @@ You can configure the tracer to support HTTP by replacing `com.lightstep.tracer:
 ```xml
 <dependency>
   <groupId>com.lightstep.tracer</groupId>
-  <artifactId>lightstep-tracer-jre</artifactId>
+  <artifactId>lightstep-tracer-android</artifactId>
   <version> VERSION </version>
 </dependency>
 <dependency>
@@ -164,7 +164,7 @@ repositories {
     mavenCentral() // OR jcenter()
 }
 dependencies {
-    compile 'com.lightstep.tracer:lightstep-tracer-jre:VERSION'
+    compile 'com.lightstep.tracer:lightstep-tracer-android:VERSION'
     compile 'com.lightstep.tracer:tracer-okhttp:VERSION'
 }
 ```
