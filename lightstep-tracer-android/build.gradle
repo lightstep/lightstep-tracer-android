@@ -128,9 +128,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.lightstep.tracer:java-common:0.15.0'
-    compile 'com.lightstep.tracer:tracer-grpc:0.15.0'
-    compile 'io.grpc:grpc-okhttp:1.4.0'
+    compile "com.lightstep.tracer:java-common:${lightStepTracerVersion}"
 }
 
 task sourcesJar(type: Jar) {

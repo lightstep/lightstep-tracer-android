@@ -33,6 +33,7 @@ android {
     }
     lintOptions {
         lintConfig file("lint.xml")
+        abortOnError false
     }
 }
 
@@ -46,7 +47,15 @@ dependencies {
     compile "com.android.support:appcompat-v7:${androidSupportVersion}"
     compile "com.android.support:design:${androidSupportVersion}"
     compile(project(":lightstep-tracer-android")) {
+        // Not needed on Android
         exclude module: 'httpclient'
+    }
+    compile("com.lightstep.tracer:tracer-grpc:${lightStepTracerVersion}") {
+        // Not needed on Android
+        exclude group: 'com.google.guava'
+    }
+    compile("io.grpc:grpc-okhttp:${grpcVersion}")  {
+        // Not needed on Android
         exclude group: 'com.google.guava'
     }
 }

@@ -27,6 +27,7 @@ repositories {
 dependencies {
     compile 'com.lightstep.tracer:lightstep-tracer-android:VERSION'
     compile 'com.lightstep.tracer:tracer-grpc:VERSION'
+    compile 'io.grpc:grpc-okhttp:VERSION'
 }
 ```
 
@@ -149,7 +150,6 @@ You can configure the tracer to support HTTP by replacing `com.lightstep.tracer:
   <artifactId>lightstep-tracer-jre</artifactId>
   <version> VERSION </version>
 </dependency>
-
 <dependency>
    <groupId>com.lightstep.tracer</groupId>
    <artifactId>tracer-okhttp</artifactId>
