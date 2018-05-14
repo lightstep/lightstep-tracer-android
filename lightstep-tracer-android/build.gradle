@@ -93,7 +93,7 @@ install {
                 packaging 'aar'
 
                 name 'The LightStep OpenTracing Implementation for Android'
-                description = 'The LightStep OpenTracing Tracer implementation for Java'
+                description = 'The LightStep OpenTracing Tracer implementation for Android'
                 url siteUrl
 
                 licenses {
@@ -110,9 +110,9 @@ install {
                     }
                 }
                 scm {
-                    connection 'https://github.com/lightstep/lightstep-tracer-java'
-                    developerConnection 'https://github.com/lightstep/lightstep-tracer-java'
-                    url 'https://github.com/lightstep/lightstep-tracer-java'
+                    connection 'https://github.com/lightstep/lightstep-tracer-android'
+                    developerConnection 'https://github.com/lightstep/lightstep-tracer-android'
+                    url 'https://github.com/lightstep/lightstep-tracer-android'
                 }
             }
         }
