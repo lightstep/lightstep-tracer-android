@@ -1,6 +1,6 @@
-# lightstep-tracer-java
+# lightstep-tracer-android
 
-[ ![Download](https://api.bintray.com/packages/lightstep/maven/lightstep-tracer-android/images/download.svg) ](https://bintray.com/lightstep/maven/) [![Circle CI](https://circleci.com/gh/lightstep/lightstep-tracer-java.svg?style=shield)](https://circleci.com/gh/lightstep/lightstep-tracer-java) [![MIT license](http://img.shields.io/badge/license-MIT-blue.svg)](http://opensource.org/licenses/MIT)
+[ ![Download](https://api.bintray.com/packages/lightstep/maven/lightstep-tracer-android/images/download.svg) ](https://bintray.com/lightstep/maven/) [![Circle CI](https://circleci.com/gh/lightstep/lightstep-tracer-android.svg?style=shield)](https://circleci.com/gh/lightstep/lightstep-tracer-android) [![MIT license](http://img.shields.io/badge/license-MIT-blue.svg)](http://opensource.org/licenses/MIT)
 
 The LightStep distributed tracing library for Android.
 
@@ -147,7 +147,7 @@ You can configure the tracer to support HTTP by replacing `com.lightstep.tracer:
 ```xml
 <dependency>
   <groupId>com.lightstep.tracer</groupId>
-  <artifactId>lightstep-tracer-jre</artifactId>
+  <artifactId>lightstep-tracer-android</artifactId>
   <version> VERSION </version>
 </dependency>
 <dependency>
@@ -164,7 +164,7 @@ repositories {
     mavenCentral() // OR jcenter()
 }
 dependencies {
-    compile 'com.lightstep.tracer:lightstep-tracer-jre:VERSION'
+    compile 'com.lightstep.tracer:lightstep-tracer-android:VERSION'
     compile 'com.lightstep.tracer:tracer-okhttp:VERSION'
 }
 ```
