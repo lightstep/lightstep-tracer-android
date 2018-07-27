@@ -21,8 +21,9 @@ android {
 
     defaultConfig {
         applicationId "com.lightstep.samples.sampleapp"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 23
+        multiDexEnabled true
         versionCode 1
         versionName "1.0"
     }
