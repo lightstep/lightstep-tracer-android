@@ -2,13 +2,13 @@
 ## [Pending Release](https://github.com/lightstep/lightstep-tracer-android/compare/master...0.14.2)
 
 <a name="0.14.2"></a>
-## [0.14.2](https://github.com/lightstep/lightstep-tracer-android/compare/0.14.3...0.14.2)
+## [0.14.2](https://github.com/lightstep/lightstep-tracer-android/compare/0.14.2...0.14.1)
 * Updated the compiled protos. Changed type of clock correction offset from int to long.
   - Included new dependency required by proto upgrade com.google.api.grpc:googleapis-common-protos:0.0.3
   - Fixed bug where large clock corrections caused crashes.
 
-<a name="0.14.2"></a> 
-## [0.14.1](https://github.com/lightstep/lightstep-tracer-android/compare/0.14.2...0.14.1)
+<a name="0.14.1"></a> 
+## [0.14.1](https://github.com/lightstep/lightstep-tracer-android/compare/0.14.1...0.14.0)
 * Upgrade dependencies (#140)    
   - com.fasterxml.jackson.core:jackson-databind from 2.8.9 to 2.9.5
   - com.lightstep.tracer from 0.15.1 to 0.15.2
