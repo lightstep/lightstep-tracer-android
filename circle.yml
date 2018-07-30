@@ -3,4 +3,6 @@ machine:
     version: openjdk8
 test:
   override:
+    - make androidDependencies
+    - (echo y) | $ANDROID_HOME/tools/bin/sdkmanager --licenses
     - make ci_test
