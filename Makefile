@@ -7,6 +7,9 @@ build:
 clean:
 	./gradlew clean
 
+androidDependencies:
+	./gradlew androidDependencies
+
 test: ci_test
 
 # The publish step does a clean and rebuild as the `gradle build` hasn't seemed
