@@ -4,3 +4,8 @@ machine:
 test:
   override:
     - make ci_test
+dependencies:
+  pre:
+    - if [ ! -d "/usr/local/android-sdk-linux/platforms/android-25.0.0" ]; then echo y | android update sdk --no-ui --all --filter "android-25"; fi
+  cache_directories:
+    - /usr/local/android-sdk-linux/platforms/android-25.0.0
