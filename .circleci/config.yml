@@ -1,0 +1,38 @@
+version: 2
+
+jobs:
+  test:
+    docker:
+      - image: circleci/android:api-28-node8-alpha
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - gradle-repo-v2-{{ .Branch }}-{{ checksum "lightstep-tracer-android/build.gradle" }}
+            - gradle-repo-v2-{{ .Branch }}-
+            - gradle-repo-v2-
+      - run:
+          name: "set environment vars"
+          command: |
+            echo 'export TERM=dumb' >> $BASH_ENV
+            source $BASH_ENV
+      - run:
+          name: "gradle dependencies"
+          command: |
+            # This is here twice because the first build fails to find
+            # android-18 in /opt/android/sdk even though it exists.
+            set +e
+            ./gradlew dependencies || ./gradlew dependencies
+      - save_cache:
+          paths:
+            - ~/.gradle
+            - /opt/android/sdk/
+          key: gradle-repo-v2-{{ .Branch }}-{{ checksum "lightstep-tracer-android/build.gradle" }}
+      - run: ./gradlew test
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - test
+
