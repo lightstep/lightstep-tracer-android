@@ -11,7 +11,13 @@ jobs:
             - gradle-repo-v1-{{ .Branch }}-{{ checksum "lightstep-tracer-javascript/build.gradle" }}
             - gradle-repo-v1-{{ .Branch }}-
             - gradle-repo-v1-
+      - run:
+          name: "set up environment"
+          command: |
+            echo 'export TERM=dumb' >> $BASH_ENV
+            source $BASH_ENV
       - run: ./gradlew dependencies
+
       - save_cache:
           paths:
             - ~/.gradle
