@@ -23,9 +23,14 @@ jobs:
             - ~/.gradle
           key: gradle-repo-v1-{{ .Branch }}-{{ checksum "lightstep-tracer-android/build.gradle" }}
       - run:
-          name: "make test"
+          name: "make build"
           command: |
-            make test || make test
+            # This is because the first build fails to find android-18 in
+            # /opt/android/sdk even though it exists.
+            set +e
+            make build || make build
+
+      - run: make test
 
 workflows:
   version: 2
