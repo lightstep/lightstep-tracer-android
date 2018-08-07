@@ -12,14 +12,14 @@ jobs:
             - gradle-repo-v1-{{ .Branch }}-
             - gradle-repo-v1-
       - run:
-          name: "set up environment"
+          name: "gradle dependencies"
           command: |
-            echo 'export TERM=dumb' >> $BASH_ENV
-            source $BASH_ENV
+            export TERM=dumb
 
+            # This is here twice because the first build fails to find
+            # android-18 in /opt/android/sdk even though it exists.
             set +e
-            ./gradlew dependencies
-            ./gradlew dependencies
+            ./gradlew dependencies || ./gradlew dependencies
       - save_cache:
           paths:
             - ~/.gradle
