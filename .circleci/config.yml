@@ -22,7 +22,10 @@ jobs:
           paths:
             - ~/.gradle
           key: gradle-repo-v1-{{ .Branch }}-{{ checksum "lightstep-tracer-android/build.gradle" }}
-      - run: make test || make test
+      - run:
+          name: "make test"
+          command: |
+            make test || make test
 
 workflows:
   version: 2
