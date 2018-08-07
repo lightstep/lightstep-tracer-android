@@ -16,20 +16,14 @@ jobs:
           command: |
             echo 'export TERM=dumb' >> $BASH_ENV
             source $BASH_ENV
-      - run: ./gradlew dependencies
 
+            set +e
+            ./gradlew dependencies
+            ./gradlew dependencies
       - save_cache:
           paths:
             - ~/.gradle
           key: gradle-repo-v1-{{ .Branch }}-{{ checksum "lightstep-tracer-android/build.gradle" }}
-      - run:
-          name: "make build"
-          command: |
-            # This is because the first build fails to find android-18 in
-            # /opt/android/sdk even though it exists.
-            set +e
-            make build || make build
-
       - run: make test
 
 workflows:
