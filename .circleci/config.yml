@@ -11,6 +11,7 @@ jobs:
             - gradle-repo-v1-{{ .Branch }}-{{ checksum "lightstep-tracer-javascript/build.gradle" }}
             - gradle-repo-v1-{{ .Branch }}-
             - gradle-repo-v1-
+      - run: make build
       - save_cache:
           paths:
             - ~/.gradle
