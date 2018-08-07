@@ -28,7 +28,7 @@ jobs:
             - ~/.gradle
             - /opt/android/sdk/
           key: gradle-repo-v2-{{ .Branch }}-{{ checksum "lightstep-tracer-android/build.gradle" }}
-      - run: make test
+      - run: ./gradlew test
 
 workflows:
   version: 2
