@@ -1,7 +1,12 @@
 <a name="Pending Release"></a>
-## [Pending Release](https://github.com/lightstep/lightstep-tracer-android/compare/master...0.14.3)
+## [Pending Release](https://github.com/lightstep/lightstep-tracer-android/compare/master...0.14.5)
 
-<a name="0.14.3></a>
+<a name="0.14.5"></a>
+## [0.14.5](https://github.com/lightstep/lightstep-tracer-java/compare/0.14.5...0.14.4)
+* Upgraded lightstep-tracer-common to 0.15.6
+  - 0.15.6 Exposes custom propagators support, and support for B3 headers.
+
+<a name="0.14.3"></a>
 ## [0.14.3](https://github.com/lightstep/lightstep-tracer-java/compare/0.14.3...0.14.2)
 * Upgraded lightstep-tracer-common to 0.15.5
   - 0.15.5 Exposes deadlineMillis in OptionsBuilder.
