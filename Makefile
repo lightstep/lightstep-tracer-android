@@ -34,6 +34,7 @@ pre-publish:
 ci_test: build
 	./gradlew test
 
+# Increment the VERSION, pushing to a tracking branch
 inc-version:
 	awk 'BEGIN { FS = "." }; { printf("%s.%d.%d", $$1, $$2, $$3+1) }' gradle.properties > gradle.properties.incr
 	mv gradle.properties.incr gradle.properties
@@ -41,4 +42,4 @@ inc-version:
 	git add gradle.properties
 	git add lightstep-tracer-android/src/main/java/com/lightstep/tracer/android/Version.java
 	git commit -m "VERSION `awk 'BEGIN { FS = "=" }; { printf("%s", $$2) }' gradle.properties`"
-	git push
+	git push --set-upstream origin `git rev-parse --abbrev-ref HEAD`
