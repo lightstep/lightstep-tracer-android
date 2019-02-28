@@ -16,6 +16,10 @@ jobs:
           command: |
             echo 'export TERM=dumb' >> $BASH_ENV
             source $BASH_ENV
+
+      - run: yes | sdkmanager --licenses || exit 0
+      - run: yes | sdkmanager --update || exit 0
+
       - run:
           name: "gradle dependencies"
           command: |
