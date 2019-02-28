@@ -1,5 +1,5 @@
 package com.lightstep.tracer.android;
 
 class Version {
-    static final String LIGHTSTEP_TRACER_VERSION = "0.14.8";
+    static final String LIGHTSTEP_TRACER_VERSION = "0.14.9";
 }
