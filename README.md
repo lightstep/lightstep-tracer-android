@@ -26,8 +26,7 @@ repositories {
 }
 dependencies {
     compile 'com.lightstep.tracer:lightstep-tracer-android:VERSION'
-    compile 'com.lightstep.tracer:tracer-grpc:VERSION'
-    compile 'io.grpc:grpc-okhttp:VERSION'
+    compile 'com.lightstep.tracer:tracer-okhttp:VERSION'
 }
 ```
 
@@ -133,14 +132,14 @@ options = new com.lightstep.tracer.shared.Options.OptionsBuilder()
 
 ### Advanced Option: Transport and Serialization Protocols
 
-By following the above configuration, the tracer will send information to LightStep using GRPC and Protocol Buffers which is the recommended configuration. If there are no specific transport protocol needs you have, there is no need to change this default.
+By following the above configuration, the tracer will send information to LightStep using HTTP and Protocol Buffers which is the recommended configuration. If there are no specific transport protocol needs you have, there is no need to change this default.
 
 There are two options for transport protocols:
 
-- [Protocol Buffers](https://developers.google.com/protocol-buffers/) over [GRPC](https://grpc.io/) - The recommended, default, and most performant solution.
-- \[ EXPERIMENTAL \] [Protocol Buffers](https://developers.google.com/protocol-buffers/) over HTTP using [OkHttp](http://square.github.io/okhttp/) - New transport protocol supported for use cases where GRPC isn't an option. In order to enable HTTP you will need to configure the LightStep collectors receiving the data to accept HTTP traffic. Reach out to LightStep for support in this.
+- [Protocol Buffers](https://developers.google.com/protocol-buffers/) over HTTP using [OkHttp](http://square.github.io/okhttp/) - The recommended and default solution.
+- [Protocol Buffers](https://developers.google.com/protocol-buffers/) over [GRPC](https://grpc.io/) - This is a more advanced solution that might be desirable if you already have gRPC networking configured. 
 
-You can configure the tracer to support HTTP by replacing `com.lightstep.tracer:tracer-grpc` with `com.lightstep.tracer:tracer-okhttp` when including the tracer dependency. i.e.
+You can configure the tracer to support gRPC by replacing `com.lightstep.tracer:tracer-okhttp` with `com.lightstep.tracer:tracer-grpc` when including the tracer dependency and including a grpc dependency. i.e.
 
 #### Maven 
 
@@ -152,7 +151,12 @@ You can configure the tracer to support HTTP by replacing `com.lightstep.tracer:
 </dependency>
 <dependency>
    <groupId>com.lightstep.tracer</groupId>
-   <artifactId>tracer-okhttp</artifactId>
+   <artifactId>tracer-grpc</artifactId>
+   <version> VERSION </version>
+</dependency>
+<dependency>
+   <groupId>io.grpc</groupId>
+   <artifactId>grpc-okhttp</artifactId>
    <version> VERSION </version>
 </dependency>
 ```
@@ -165,7 +169,8 @@ repositories {
 }
 dependencies {
     compile 'com.lightstep.tracer:lightstep-tracer-android:VERSION'
-    compile 'com.lightstep.tracer:tracer-okhttp:VERSION'
+    compile 'com.lightstep.tracer:tracer-grpc:VERSION'
+    compile 'io.grpc:grpc-okhttp:VERSION'
 }
 ```
 
