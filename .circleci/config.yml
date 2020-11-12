@@ -75,7 +75,7 @@ workflows:
       - test
   release:
     jobs:
-      - release
+      - release:
           context: release-context
           filters:
             tags:
