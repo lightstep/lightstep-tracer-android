@@ -15,8 +15,6 @@ test: ci_test
 #
 # See https://bintray.com/lightstep for published artifacts
 publish: pre-publish build test
-	git tag `awk 'BEGIN { FS = "=" }; { printf("%s", $$2) }' gradle.properties`
-	git push --tags
 	./gradlew bintrayUpload
 	@echo
 	@echo "\033[92mSUCCESS: published v`awk 'BEGIN { FS = "=" }; { printf("%s", $$2) }' gradle.properties` \033[0m"
@@ -34,12 +32,6 @@ pre-publish:
 ci_test: build
 	./gradlew test
 
-# Increment the VERSION, pushing to a tracking branch
+# If no version is specified, the minor version will be automatically increased.
 inc-version:
-	awk 'BEGIN { FS = "." }; { printf("%s.%d.%d", $$1, $$2, $$3+1) }' gradle.properties > gradle.properties.incr
-	mv gradle.properties.incr gradle.properties
-	make -C lightstep-tracer-android generate-version-source-file
-	git add gradle.properties
-	git add lightstep-tracer-android/src/main/java/com/lightstep/tracer/android/Version.java
-	git commit -m "VERSION `awk 'BEGIN { FS = "=" }; { printf("%s", $$2) }' gradle.properties`"
-	git push --set-upstream origin `git rev-parse --abbrev-ref HEAD`
+	./inc-version.sh $(NEW_VERSION)

@@ -15,3 +15,8 @@ clean:
 generate-version-source-file:
 	@echo "Updating $(VERSION_SOURCE)"
 	perl -pi -e 's/(\d+)\.(\d+)\.(\d+)/ ($$1) . q{.} . ($$2) . q{.} . ($$3+1) /ge' $(VERSION_SOURCE)
+
+# Uses $NEW_VERSION to set the value.
+generate-version-source-file-withversion:
+	@echo "Updating $(VERSION_SOURCE) with version $(NEW_VERSION)"
+	perl -pi -e 's/(\d+)\.(\d+)\.(\d+)/$$ENV{NEW_VERSION}/ge' $(VERSION_SOURCE)
