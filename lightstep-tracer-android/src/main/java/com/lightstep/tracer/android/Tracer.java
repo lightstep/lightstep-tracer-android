@@ -86,6 +86,11 @@ public class Tracer extends AbstractTracer {
         addTracerTag(LIGHTSTEP_TRACER_VERSION_KEY, LIGHTSTEP_TRACER_VERSION);
     }
 
+    @Override
+    protected void printLogToConsole(InternalLogLevel level, String msg, Throwable throwable) {
+        printLogToConsole(level, msg, throwable.toString()); // FIXME
+    }
+
     protected void printLogToConsole(InternalLogLevel level, String msg, Object payload) {
         String s = msg;
         if (payload != null) {
