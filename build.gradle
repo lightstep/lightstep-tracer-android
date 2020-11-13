@@ -4,6 +4,6 @@ ext {
     junitVersion = "4.12"
     androidSupportVersion = "23.0.0"
     openTracingVersion = "0.33.0"
-    lightStepTracerVersion = "0.18.0"
-    grpcVersion = "1.11.0"
+    lightStepTracerVersion = "0.30.1"
+    grpcVersion = "1.23.0"
 }
