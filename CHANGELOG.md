@@ -1,5 +1,9 @@
 <a name="Pending Release"></a>
-## [Pending Release](https://github.com/lightstep/lightstep-tracer-android/compare/master...0.15.1)
+## [Pending Release](https://github.com/lightstep/lightstep-tracer-android/compare/master...0.30.1)
+
+<a name="0.30.1"></a>
+## [0.30.1](https://github.com/lightstep/lightstep-tracer-android/compare/0.30.1...0.15.0)
+* Upgraded lightstep-tracer-common to 0.30.1
 
 <a name="0.15.1"></a>
 ## [0.15.1](https://github.com/lightstep/lightstep-tracer-android/compare/0.15.1...0.15.0)
