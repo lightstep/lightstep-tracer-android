@@ -4,7 +4,7 @@ ext {
     junitVersion = "4.12"
     androidSupportVersion = "23.0.0"
     openTracingVersion = "0.33.0"
-    lightStepTracerVersion = "0.19.3"
+    lightStepTracerVersion = "0.25.0"
 
     // To be used when tracer-grpc/grpc-okhttp is leveraged.
     grpcVersion = "1.23.0"
