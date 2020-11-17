@@ -30,7 +30,9 @@ dependencies {
 }
 ```
 
-* Be sure to replace `VERSION` with the current version of the library
+* Be sure to replace `VERSION` with the current version of the library.
+  **Note**: Use the 0.25.x family version if you intend to use `okhttp` as transport,
+  else use the 0.30.x one. See more in the [Maven](#maven) section.
 * The artifact is published to both `jcenter()` and `mavenCentral()`. Use whichever you prefer.
 
 ### Update your AndroidManifest.xml
@@ -136,8 +138,8 @@ By following the above configuration, the tracer will send information to LightS
 
 There are two options for transport protocols:
 
-- [Protocol Buffers](https://developers.google.com/protocol-buffers/) over HTTP using [OkHttp](http://square.github.io/okhttp/) - The recommended and default solution.
-- [Protocol Buffers](https://developers.google.com/protocol-buffers/) over [GRPC](https://grpc.io/) - This is a more advanced solution that might be desirable if you already have gRPC networking configured. 
+- [Protocol Buffers](https://developers.google.com/protocol-buffers/) over HTTP using [OkHttp 3](http://square.github.io/okhttp/) - The recommended and default solution. Supported in the 0.25.x version family, as OkHttp 3 runs under the supported Android versions.
+- [Protocol Buffers](https://developers.google.com/protocol-buffers/) over [GRPC](https://grpc.io/) - This is a more advanced solution that might be desirable if you already have gRPC networking configured. Use the 0.30.x version family.
 
 You can configure the tracer to support gRPC by replacing `com.lightstep.tracer:tracer-okhttp` with `com.lightstep.tracer:tracer-grpc` when including the tracer dependency and including a grpc dependency. i.e.
 
