@@ -1,5 +1,9 @@
 <a name="Pending Release"></a>
-## [Pending Release](https://github.com/lightstep/lightstep-tracer-android/compare/master...0.30.1)
+## [Pending Release](https://github.com/lightstep/lightstep-tracer-android/compare/master...0.30.2)
+
+<a name="0.30.2"></a>
+## [0.30.2](https://github.com/lightstep/lightstep-tracer-android/compare/0.30.2...0.30.1)
+* Added LICENSE (MIT).
 
 <a name="0.30.1"></a>
 ## [0.30.1](https://github.com/lightstep/lightstep-tracer-android/compare/0.30.1...0.15.0)
