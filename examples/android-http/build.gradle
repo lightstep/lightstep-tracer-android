@@ -51,5 +51,4 @@ dependencies {
         // Not needed on Android
         exclude module: 'httpclient'
     }
-    compile("com.lightstep.tracer:tracer-okhttp:${lightStepTracerVersion}")
 }
