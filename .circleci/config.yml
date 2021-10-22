@@ -9,8 +9,6 @@ jobs:
       - restore_cache:
           keys:
             - gradle-repo-v2-{{ .Branch }}-{{ checksum "lightstep-tracer-android/build.gradle" }}
-            - gradle-repo-v2-{{ .Branch }}-
-            - gradle-repo-v2-
       - run:
           name: "set environment vars"
           command: |
@@ -40,11 +38,10 @@ jobs:
       - image: circleci/android:api-28-node8-alpha
     steps:
       - checkout
+      - run: ls -la $HOME
       - restore_cache:
           keys:
             - gradle-repo-v2-{{ .Branch }}-{{ checksum "lightstep-tracer-android/build.gradle" }}
-            - gradle-repo-v2-{{ .Branch }}-
-            - gradle-repo-v2-
       - run:
           name: "set environment vars"
           command: |
@@ -61,12 +58,22 @@ jobs:
             # android-18 in /opt/android/sdk even though it exists.
             set +e
             ./gradlew dependencies || ./gradlew dependencies
+      - run:
+          name: Deploying
+          command: |
+            mkdir ~/.gpg-lightstep
+            export GNUPGHOME=~/.gpg-lightstep
+            echo -e "$GPG_SECRET_KEY" | gpg --import
+            # HORRIBLE HACK. Thanks, Gradle: https://github.com/gradle/gradle/issues/888
+            gpg --export-secret-keys >~/.gpg-lightstep/secring.gpg
+            #echo "signing.keyId=$GPG_KEY_NAME" >> gradle.properties
+            #echo "signing.secretKeyRingFile=~/.gpg-lightstep/secring.gpg" >> gradle.properties
+            make publish
       - save_cache:
           paths:
             - ~/.gradle
             - /opt/android/sdk/
           key: gradle-repo-v2-{{ .Branch }}-{{ checksum "lightstep-tracer-android/build.gradle" }}
-      - run: make publish
 
 workflows:
   version: 2

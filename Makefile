@@ -15,16 +15,16 @@ test: ci_test
 #
 # See https://bintray.com/lightstep for published artifacts
 publish: pre-publish build test
-	./gradlew bintrayUpload
+	./gradlew uploadArchives
 	@echo
 	@echo "\033[92mSUCCESS: published v`awk 'BEGIN { FS = "=" }; { printf("%s", $$2) }' gradle.properties` \033[0m"
 	@echo
 
 pre-publish:
-	@test -n "$$BINTRAY_USER" || (echo "BINTRAY_USER must be defined to publish" && false)
-	@test -n "$$BINTRAY_API_KEY" || (echo "BINTRAY_API_KEY must be defined to publish" && false)
-	@test -n "$$MAVEN_CENTRAL_USER_TOKEN" || (echo "MAVEN_CENTRAL_USER_TOKEN must be defined to publish" && false)
-	@test -n "$$MAVEN_CENTRAL_TOKEN_PASSWORD" || (echo "MAVEN_CENTRAL_TOKEN_PASSWORD must be defined to publish" && false)
+	@test -n "$$SONATYPE_USERNAME" || (echo "SONATYPE_USERNAME must be defined to publish" && false)
+	@test -n "$$SONATYPE_PASSWORD" || (echo "SONATYPE_PASSWORD must be defined to publish" && false)
+	@test -n "$$GPG_KEY_NAME" || (echo "GPG_KEY_NAME must be defined to publish" && false)
+	@test -n "$$GPG_SECRET_KEY" || (echo "GPG_SECRET_KEY must be defined to publish" && false)
 	@git diff-index --quiet HEAD || (echo "git has uncommitted changes. Refusing to publish." && false)
 	@echo "\033[92mPublishing as $$BINTRAY_USER with key <HIDDEN> \033[0m"
 

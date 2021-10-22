@@ -9,15 +9,14 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.2.2'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.2'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
     }
 }
 
-
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
-apply plugin: 'com.jfrog.bintray'
+apply plugin: 'maven'
+apply plugin: 'signing'
 
 group = "com.lightstep.tracer"
 project.version = current_version
@@ -42,6 +41,7 @@ android {
 
     lintOptions {
         lintConfig file("lint.xml")
+        abortOnError false
     }
 
     compileOptions {
@@ -52,40 +52,9 @@ android {
 
 Properties properties = new Properties()
 
-bintray {
-    user = System.getenv('BINTRAY_USER')
-    key = System.getenv('BINTRAY_API_KEY')
-
-    configurations = ['archives']
-    pkg {
-        repo = "maven"
-        name = "lightstep-tracer-android"
-        userOrg = 'lightstep'
-        websiteUrl = siteUrl
-        vcsUrl = gitUrl
-        licenses = ['MIT']
-        publicDownloadNumbers = true
-        publish = true
-        version {
-            name = current_version
-            released = new Date()
-
-            gpg {
-                sign = true
-                passphrase = System.getenv('BINTRAY_GPG_PASSPHRASE')
-            }
-
-            // See https://github.com/bintray/bintray-examples/blob/master/gradle-example/build.gradle
-            mavenCentralSync {
-                sync = true
-                user = System.getenv('MAVEN_CENTRAL_USER_TOKEN')
-                password = System.getenv('MAVEN_CENTRAL_TOKEN_PASSWORD')
-                close = '1'
-            }
-        }
-    }
-}
-
+// TODO: Figure out whether we need this after moving
+// to publishing directly to Sonatype (this section
+// is essentially duplicate)
 install {
     repositories.mavenInstaller {
         pom {
@@ -120,11 +89,50 @@ install {
 }
 
 repositories {
-    jcenter()
-    maven {
-        // published beta artifacts of opentracing API
-        url  "http://oss.jfrog.org/oss-snapshot-local/"
+    mavenCentral()
+}
+
+uploadArchives {
+  repositories {
+    mavenDeployer {
+      beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+      repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+        authentication(userName: System.getenv("SONATYPE_USERNAME"), password: System.getenv("SONATYPE_PASSWORD"))
+      }
+
+      snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+        authentication(userName: System.getenv("SONATYPE_USERNAME"), password: System.getenv("SONATYPE_PASSWORD"))
+      }
+
+      pom.project {
+        packaging 'aar'
+
+        name 'The LightStep OpenTracing Implementation for Android'
+        description = 'The LightStep OpenTracing Tracer implementation for Android'
+        url siteUrl
+
+        licenses {
+            license {
+                name 'MIT'
+                url 'https://opensource.org/licenses/MIT'
+            }
+        }
+        developers {
+            developer {
+                id 'lightstep'
+                name 'LightStep'
+                email 'hello@lightstep.com'
+            }
+        }
+        scm {
+            connection 'https://github.com/lightstep/lightstep-tracer-android'
+            developerConnection 'https://github.com/lightstep/lightstep-tracer-android'
+            url 'https://github.com/lightstep/lightstep-tracer-android'
+        }
+      }
     }
+  }
 }
 
 dependencies {
@@ -152,6 +160,26 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 artifacts {
     archives javadocJar
     archives sourcesJar
+}
+
+import org.gradle.plugins.signing.Sign
+
+gradle.taskGraph.whenReady { taskGraph ->
+    if (taskGraph.allTasks.any { it instanceof Sign }) {
+        def id = System.getenv("GPG_KEY_NAME")
+        println("KEY: "+id)
+        id = id.substring(id.length()-8)
+        def file = "/home/circleci/.gpg-lightstep/secring.gpg"
+        def password = ""
+
+        allprojects { ext."signing.keyId" = id }
+        allprojects { ext."signing.secretKeyRingFile" = file }
+        allprojects { ext."signing.password" = password }
+    }
+}
+
+signing {
+    sign configurations.archives
 }
 
 task findConventions << {
