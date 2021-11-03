@@ -26,14 +26,13 @@ repositories {
 }
 dependencies {
     compile 'com.lightstep.tracer:lightstep-tracer-android:VERSION'
-    compile 'com.lightstep.tracer:tracer-okhttp:VERSION'
 }
 ```
 
-* Be sure to replace `VERSION` with the current version of the library.
-  **Note**: Use the 0.25.x family version if you intend to use `okhttp` as transport,
-  else use the 0.30.x one. See more in the [Maven](#maven) section.
-* The artifact is published to both `jcenter()` and `mavenCentral()`. Use whichever you prefer.
+* If using the `grpc` transport, use the **0.3x.x** version family.
+* If using the `okhttp` transport, use the **0.2x.x** version family. **This is the recommended deployment**.
+
+See more in the [Maven](#maven) section and Gradle sections.
 
 ### Update your AndroidManifest.xml
 
@@ -143,7 +142,7 @@ There are two options for transport protocols:
 
 You can configure the tracer to support gRPC by replacing `com.lightstep.tracer:tracer-okhttp` with `com.lightstep.tracer:tracer-grpc` when including the tracer dependency and including a grpc dependency. i.e.
 
-#### Maven 
+#### Maven
 
 ```xml
 <dependency>
@@ -151,16 +150,14 @@ You can configure the tracer to support gRPC by replacing `com.lightstep.tracer:
   <artifactId>lightstep-tracer-android</artifactId>
   <version> VERSION </version>
 </dependency>
+
+<!-- Additional dependency if using the grpc/0.3x.x family -->
 <dependency>
    <groupId>com.lightstep.tracer</groupId>
    <artifactId>tracer-grpc</artifactId>
    <version> VERSION </version>
 </dependency>
-<dependency>
-   <groupId>io.grpc</groupId>
-   <artifactId>grpc-okhttp</artifactId>
-   <version> VERSION </version>
-</dependency>
+
 ```
 
 #### Gradle
@@ -171,8 +168,9 @@ repositories {
 }
 dependencies {
     compile 'com.lightstep.tracer:lightstep-tracer-android:VERSION'
+
+    // Additional dependency if using the grpc/0.3x.x family
     compile 'com.lightstep.tracer:tracer-grpc:VERSION'
-    compile 'io.grpc:grpc-okhttp:VERSION'
 }
 ```
 
