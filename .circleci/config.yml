@@ -9,6 +9,8 @@ jobs:
       - restore_cache:
           keys:
             - gradle-repo-v2-{{ .Branch }}-{{ checksum "lightstep-tracer-android/build.gradle" }}
+            - gradle-repo-v2-{{ .Branch }}-
+            - gradle-repo-v2-
       - run:
           name: "set environment vars"
           command: |
@@ -42,6 +44,8 @@ jobs:
       - restore_cache:
           keys:
             - gradle-repo-v2-{{ .Branch }}-{{ checksum "lightstep-tracer-android/build.gradle" }}
+            - gradle-repo-v2-{{ .Branch }}-
+            - gradle-repo-v2-
       - run:
           name: "set environment vars"
           command: |

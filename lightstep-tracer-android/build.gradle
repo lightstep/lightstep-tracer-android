@@ -167,7 +167,12 @@ import org.gradle.plugins.signing.Sign
 gradle.taskGraph.whenReady { taskGraph ->
     if (taskGraph.allTasks.any { it instanceof Sign }) {
         def id = System.getenv("GPG_KEY_NAME")
-        println("KEY: "+id)
+        if (id == null) {
+            logger.error("GPG_KEY_NAME was not found")
+        } else if (id.length() < 8) {
+            logger.error("GPG_KEY_NAME is too short, length is " + id.length())
+        }
+
         id = id.substring(id.length()-8)
         def file = "/home/circleci/.gpg-lightstep/secring.gpg"
         def password = ""
