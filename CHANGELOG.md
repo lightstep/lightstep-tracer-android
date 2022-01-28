@@ -1,10 +1,9 @@
 <a name="Pending Release"></a>
-## [Pending Release](https://github.com/lightstep/lightstep-tracer-android/compare/master...0.30.1)
+## [Pending Release](https://github.com/lightstep/lightstep-tracer-android/compare/master...0.26.1)
 
-<a name="0.30.1"></a>
-## [0.30.1](https://github.com/lightstep/lightstep-tracer-android/compare/0.30.1...0.15.0)
-* Upgraded lightstep-tracer-common to 0.30.1
-* NOT compatible with okhttp anymore (uses a newer bytecode version).
+<a name="0.26.1"></a>
+## [0.26.1](https://github.com/lightstep/lightstep-tracer-android/compare/0.26.1...0.26.0)
+* Upgraded lightstep-tracer-common to 0.26.1
 
 <a name="0.18.0"></a>
 ## [0.18.1](https://github.com/lightstep/lightstep-tracer-android/compare/0.18.0...0.15.0)
