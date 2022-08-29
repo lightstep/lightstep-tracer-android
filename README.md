@@ -1,5 +1,7 @@
 # lightstep-tracer-android
 
+> ❗ **This instrumentation is no longer recommended**. Please review [documentation on setting up and configuring the OpenTelemetry Java SDK and APIs](https://github.com/open-telemetry/opentelemetry-java) for more information on migrating to OpenTelemetry.
+
 [ ![Download](https://api.bintray.com/packages/lightstep/maven/lightstep-tracer-android/images/download.svg) ](https://bintray.com/lightstep/maven/) [![Circle CI](https://circleci.com/gh/lightstep/lightstep-tracer-android.svg?style=shield)](https://circleci.com/gh/lightstep/lightstep-tracer-android) [![MIT license](http://img.shields.io/badge/license-MIT-blue.svg)](http://opensource.org/licenses/MIT)
 
 The LightStep distributed tracing library for Android.
